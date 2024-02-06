@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\DosenController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,55 +13,31 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-//mahasiswa
 Route::get('/', function () {
-    return view('auth.new_login');
+    return view('auth.login');
 });
 
-Route::get('/ajukan', function (){
-    return view('mahasiswa.ajukan');
-});
-Route::get('/berkas', function (){
-    return view('mahasiswa.berkas');
-});
-Route::get('/laporan', function (){
-    return view('mahasiswa.laporan');
-});
-Route::get('/jadwal', function (){
-    return view('mahasiswa.jadwal');
-});
+//mahasiswa
+Route::get('/ajukan', [App\Http\Controllers\MahasiswaController::class, 'ajukan']) -> middleware('auth') -> name('ajukan');
+Route::get('/berkas', [App\Http\Controllers\MahasiswaController::class, 'berkas']) -> middleware('auth') -> name('berkas');
+Route::get('/laporan', [App\Http\Controllers\MahasiswaController::class, 'laporan']) -> middleware('auth') -> name('laporan');
+Route::get('/jadwal', [App\Http\Controllers\MahasiswaController::class, 'jadwal']) -> middleware('auth') -> name('jadwal');
 
 
 //dosen
-Route::get('/dash_dosen', function (){
-    return view('dosen.dashboard');
-});
-Route::get('/laporan_dosen', function (){
-    return view('dosen.laporan');
-});
-Route::get('/jadwal_dosen', function (){
-    return view('dosen.jadwal');
-});
-Route::get('/nilai', function (){
-    return view('dosen.nilai');
-});
-Route::get('/revisi', function (){
-    return view('dosen.revisi');
-});
+Route::get('/dashboard', [App\Http\Controllers\DosenController::class, 'index']) -> middleware('auth') -> name('dashboard');
+Route::get('/laporan', [App\Http\Controllers\DosenController::class, 'laporan']) -> middleware('auth') -> name('laporan');  
+Route::get('/jadwal', [App\Http\Controllers\DosenController::class, 'jadwal']) -> middleware('auth') -> name('jadwal');
+Route::get('/nilai', [App\Http\Controllers\DosenController::class, 'nilai']) -> middleware('auth') -> name('nilai');
+Route::get('/revisi', [App\Http\Controllers\DosenController::class, 'revisi']) -> middleware('auth') -> name('revisi');
+
 
 //koordinator
-Route::get('/topik', function (){
-    return view('koordinator.topik');
-});
+Route::get('/topik', [App\Http\Controllers\KoordinatorController::class, 'topik']) -> middleware('auth') -> name('topik');
+
+
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

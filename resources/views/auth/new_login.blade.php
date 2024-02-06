@@ -31,7 +31,6 @@
                             <div class="col-12">
                                 <div class="mb-4">
                                     <h3>Sign in</h3>
-                                    <p>Are you a field supervisor? <a href="#!">Sign up</a></p>
                                 </div>
                             </div>
                         </div>
@@ -41,21 +40,33 @@
                             <div class="row gy-3 overflow-hidden">
                                 <div class="col-12">
                                     <div class="form-floating mb-3">
+                                        <select class="form-control" name="number" id="number" required>
+                                            <option value="">Pilih Sebagai</option>
+                                            <option value="koordinator">Koordinator</option>
+                                            <option value="doseno">Dosen</option>
+                                            <option value="mahasiswa">Mahasiswa</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating mb-3">
                                         <input type="number" class="form-control" name="number" id="number"
                                             placeholder="2008107010083" required>
                                         <label for="email" class="form-label">NPM/NIP</label>
                                     </div>
                                 </div>
                                 @error('number')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
 
                                 <div class="col-12">
                                     <div class="form-floating mb-3">
-                                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password"
-                                            value="" placeholder="Password" required autocomplete="current-password">
+                                        <input type="password"
+                                            class="form-control @error('password') is-invalid @enderror" name="password"
+                                            id="password" value="" placeholder="Password" required
+                                            autocomplete="current-password">
                                         <label for="password" class="form-label">Password</label>
                                     </div>
                                 </div>
